@@ -443,23 +443,23 @@ p5.Color = class Color {
 
       case 'rgb%':
         return 'rgb('.concat(
-          (100 * f[0]).toPrecision(3),
+          (100 * f[0]).toFixed(1),
           '%, ',
-          (100 * f[1]).toPrecision(3),
+          (100 * f[1]).toFixed(1),
           '%, ',
-          (100 * f[2]).toPrecision(3),
+          (100 * f[2]).toFixed(1),
           '%)'
         );
 
       case 'rgba%':
         return 'rgba('.concat(
-          (100 * f[0]).toPrecision(3),
+          (100 * f[0]).toFixed(1),
           '%, ',
-          (100 * f[1]).toPrecision(3),
+          (100 * f[1]).toFixed(1),
           '%, ',
-          (100 * f[2]).toPrecision(3),
+          (100 * f[2]).toFixed(1),
           '%, ',
-          (100 * f[3]).toPrecision(3),
+          (100 * f[3]).toFixed(1),
           '%)'
         );
 
@@ -467,23 +467,11 @@ p5.Color = class Color {
       case 'hsv':
         if (!this.hsba) this.hsba = color_conversion._rgbaToHSBA(this._array);
         return 'hsb('.concat(
-          this.hsba[0] * this.maxes[constants.HSB][0],
+          (this.hsba[0] * this.maxes[constants.HSB][0]).toFixed(),
           ', ',
-          this.hsba[1] * this.maxes[constants.HSB][1],
-          ', ',
-          this.hsba[2] * this.maxes[constants.HSB][2],
-          ')'
-        );
-
-      case 'hsb%':
-      case 'hsv%':
-        if (!this.hsba) this.hsba = color_conversion._rgbaToHSBA(this._array);
-        return 'hsb('.concat(
-          (100 * this.hsba[0]).toPrecision(3),
+          (100 * this.hsba[1]).toFixed(1),
           '%, ',
-          (100 * this.hsba[1]).toPrecision(3),
-          '%, ',
-          (100 * this.hsba[2]).toPrecision(3),
+          (100 * this.hsba[2]).toFixed(1),
           '%)'
         );
 
@@ -491,76 +479,39 @@ p5.Color = class Color {
       case 'hsva':
         if (!this.hsba) this.hsba = color_conversion._rgbaToHSBA(this._array);
         return 'hsba('.concat(
-          this.hsba[0] * this.maxes[constants.HSB][0],
+          (this.hsba[0] * this.maxes[constants.HSB][0]).toFixed(),
           ', ',
-          this.hsba[1] * this.maxes[constants.HSB][1],
-          ', ',
-          this.hsba[2] * this.maxes[constants.HSB][2],
-          ', ',
+          (100 * this.hsba[1]).toFixed(1),
+          '%, ',
+          (100 * this.hsba[2]).toFixed(1),
+          '%, ',
           alpha,
           ')'
         );
 
-      case 'hsba%':
-      case 'hsva%':
-        if (!this.hsba) this.hsba = color_conversion._rgbaToHSBA(this._array);
-        return 'hsba('.concat(
-          (100 * this.hsba[0]).toPrecision(3),
-          '%, ',
-          (100 * this.hsba[1]).toPrecision(3),
-          '%, ',
-          (100 * this.hsba[2]).toPrecision(3),
-          '%, ',
-          (100 * alpha).toPrecision(3),
-          '%)'
-        );
 
       case 'hsl':
         if (!this.hsla) this.hsla = color_conversion._rgbaToHSLA(this._array);
         return 'hsl('.concat(
-          this.hsla[0] * this.maxes[constants.HSL][0],
+          (this.hsla[0] * this.maxes[constants.HSL][0]).toFixed(),
           ', ',
-          this.hsla[1] * this.maxes[constants.HSL][1],
-          ', ',
-          this.hsla[2] * this.maxes[constants.HSL][2],
-          ')'
-        );
-
-      case 'hsl%':
-        if (!this.hsla) this.hsla = color_conversion._rgbaToHSLA(this._array);
-        return 'hsl('.concat(
-          (100 * this.hsla[0]).toPrecision(3),
+          (100 * this.hsla[1]).toFixed(1),
           '%, ',
-          (100 * this.hsla[1]).toPrecision(3),
-          '%, ',
-          (100 * this.hsla[2]).toPrecision(3),
+          (100 * this.hsla[2]).toFixed(1),
           '%)'
         );
 
       case 'hsla':
         if (!this.hsla) this.hsla = color_conversion._rgbaToHSLA(this._array);
         return 'hsla('.concat(
-          this.hsla[0] * this.maxes[constants.HSL][0],
+          (this.hsla[0] * this.maxes[constants.HSL][0]).toFixed(),
           ', ',
-          this.hsla[1] * this.maxes[constants.HSL][1],
-          ', ',
-          this.hsla[2] * this.maxes[constants.HSL][2],
-          ', ',
+          (100 * this.hsla[1]).toFixed(1),
+          '%, ',
+          (100 * this.hsla[2]).toFixed(1),
+          '%, ',
           alpha,
           ')'
-        );
-
-      case 'hsla%':
-        if (!this.hsla) this.hsla = color_conversion._rgbaToHSLA(this._array);
-        return 'hsl('.concat(
-          (100 * this.hsla[0]).toPrecision(3),
-          '%, ',
-          (100 * this.hsla[1]).toPrecision(3),
-          '%, ',
-          (100 * this.hsla[2]).toPrecision(3),
-          '%, ',
-          (100 * alpha).toPrecision(3),
-          '%)'
         );
 
       case 'rgba':
