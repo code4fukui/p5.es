@@ -459,8 +459,8 @@ p5.Color = class Color {
           '%, ',
           (100 * f[2]).toFixed(1),
           '%, ',
-          (100 * f[3]).toFixed(1),
-          '%)'
+          alpha,
+          ')'
         );
 
       case 'hsb':
