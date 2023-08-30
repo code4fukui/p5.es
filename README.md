@@ -14,6 +14,12 @@ const c = new Color("hsl(100,30%,20%)");
 console.log(c.toString("rgb%")); // rgb(18.0%, 26.0%, 14.0%)
 ```
 
+## test
+
+```sh
+deno test
+```
+
 ## reference
 
 - [p5.js](https://github.com/processing/p5.js)
