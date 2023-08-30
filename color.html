@@ -1,0 +1,51 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="icon" href="data:">
+<title>p5.es color</title>
+</head><body>
+<h1>p5.es color</h1>
+
+<input type=color id=in_color><br>
+<div id=div_output></div>
+<input type=text id=in_color2><br>
+
+<script type="module">
+import Color from "./src/color/p5.Color.js";
+
+const formatNames = [
+  "#rrggbb",
+  "#rrggbbaa",
+  "#rgb",
+  "#rgba",
+  "rgb",
+  "rgb%",
+  "rgba%",
+  "hsb",
+  "hsv",
+  "hsb%",
+  "hsv%",
+  "hsba",
+  "hsva",
+  "hsba%",
+  "hsva%",
+  "hsl",
+  "hsl%",
+  "hsla",
+  "hsla%",
+  "rgba",
+];
+
+in_color.onchange = () => {
+  const col = in_color.value;
+  const c = new Color(col);
+  const ss = [];
+  for (const f of formatNames) {
+    ss.push(`${f}: ${c.toString(f)}`);
+  }
+  div_output.innerHTML = ss.join("<br>");
+};
+in_color2.onchange = () => {
+  const s = in_color2.value;
+  const v = parseInt(s).toString() == s ? parseInt(s) : s;
+  in_color.value = new Color(v).toString("#rrggbb");
+  in_color.onchange();
+};
+</script>

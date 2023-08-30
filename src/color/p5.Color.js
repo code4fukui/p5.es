@@ -7,9 +7,17 @@
  * @requires color_conversion
  */
 
-import p5 from '../core/main';
-import * as constants from '../core/constants';
-import color_conversion from './color_conversion';
+//import p5 from '../core/main';
+const p5 = {};
+p5._colorMode = constants.RGB;
+p5._colorMaxes = {
+  rgb: [255, 255, 255, 255],
+  hsb: [360, 100, 100, 1],
+  hsl: [360, 100, 100, 1]
+};
+
+import * as constants from '../core/constants.js';
+import color_conversion from './color_conversion.js';
 
 /**
  * CSS named colors.
@@ -342,15 +350,16 @@ const colorPatterns = {
  *                                          or CSS color.
  */
 p5.Color = class Color {
-  constructor(pInst, vals) {
+  constructor(vals) {
+    const pInst = p5;
     // Record color mode and maxes at time of construction.
     this._storeModeAndMaxes(pInst._colorMode, pInst._colorMaxes);
-
+    
     // Calculate normalized RGBA values.
     if (![constants.RGB, constants.HSL, constants.HSB].includes(this.mode)) {
       throw new Error(`${this.mode} is an invalid colorMode.`);
     } else {
-      this._array = Color._parseInputs.apply(this, vals);
+      this._array = Color._parseInputs.apply(this, [vals]);
     }
 
     // Expose closest screen color.

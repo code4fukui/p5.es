@@ -13,7 +13,8 @@
  * interchangeably.
  */
 
-import p5 from '../core/main';
+//import p5 from '../core/main';
+const p5 = {};
 p5.ColorConversion = {
   /**
    * Convert an HSBA array to HSLA.
