@@ -43,3 +43,7 @@ Deno.test("parse", () => {
   t.assertEquals(new Color("hsla(0, 100.0%, 50.0%, 1)").toString("#rrggbbaa"), c);
   t.assertEquals(new Color("rgba(255,0,0,1)").toString("#rrggbbaa"), c);
 });
+Deno.test("gray", () => {
+  const c = new Color(127);
+  t.assertEquals(c.toString("#rrggbb"), "#7f7f7f");
+});
