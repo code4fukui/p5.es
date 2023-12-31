@@ -31,23 +31,29 @@ export const createCanvas = (w, h) => {
       window.mouseClicked(e);
     }
   };
-  if ("touchstart" in window) {
-    c.touchstart = (e) => {
-      const t = e.touches[0];
-      mouseX = t.clientX * dpr;
-      mouseY = t.clientY * dpr;
+  if ("ontouchstart" in window) {
+    c.ontouchstart = function (e) {
+      e.preventDefault();
+      const t = e.changedTouches[0];
+      mouseX = t.pageX * dpr;
+      mouseY = t.pageY * dpr;
       clicked(e);
     };
-    c.ontouchmove = (e) => {
-      const t = e.touches[0];
-      mouseX = t.clientX * dpr;
-      mouseY = t.clientY * dpr;
+    c.ontouchmove = function (e) {
+      e.preventDefault();
+      const t = e.changedTouches[0];
+      mouseX = t.pageX * dpr;
+      mouseY = t.pageY * dpr;
     };
-    c.ontouchend = (e) => {
-      const t = e.touches[0];
-      mouseX = t.clientX * dpr;
-      mouseY = t.clientY * dpr;
+    c.ontouchend = function (e) {
+      e.preventDefault();
+      const t = e.changedTouches[0];
+      mouseX = t.pageX * dpr;
+      mouseY = t.pageY * dpr;
       clicked(e);
+    };
+    c.ontouchcancel = function (e) {
+      e.preventDefault();
     };
   } else {
     c.onmousedown = (e) => {
@@ -61,9 +67,9 @@ export const createCanvas = (w, h) => {
     };
   }
   if (fullmode) {
-    c.style.width = "100vw";
-    c.style.height = "100vh";
     document.body.style.overflow = "hidden";
+    document.body.style.width = "100vw";
+    document.body.style.height = "100vh";
     document.body.style.margin = 0;
     document.body.appendChild(c);
   }
@@ -148,9 +154,10 @@ export const main = async (draw) => {
     const c = canvas;
     const flgresize = innerWidth * dpr != c.width || innerHeight * dpr != c.height;
     if (flgresize) {
-      console.log(dpr);
       c.width = innerWidth * dpr;
       c.height = innerHeight * dpr;
+      c.style.width = innerWidth + "px";
+      c.style.height = innerHeight + "px";
     }
     const now = performance.now();
     deltaTime = now - tbk;
@@ -172,13 +179,3 @@ export const pop = () => {
 export const translate = (dx, dy) => {
   g.translate(dx, dy);
 };
-
-const c = document.documentElement;
-const touchHandler = e => {
-  if (e.touches.length > 1) {
-    e.preventDefault();
-  }
-};
-c.addEventListener("touchstart", touchHandler, { passive: false });
-//c.addEventListener("touchmove", function(e) { e.preventDefault(); }, { passive: false });
-//c.addEventListener("touchend", function(e) { e.preventDefault(); }, { passive: false });
