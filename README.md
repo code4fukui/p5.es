@@ -5,6 +5,10 @@
 
 ## Usage
 
+### game demo
+
+- https://code4fukui.github.io/p5.es/
+
 ### Color
 
 ```js

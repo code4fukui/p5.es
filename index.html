@@ -1,0 +1,32 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="icon" href="data:">
+<script type="module">
+import { background, strokeWeight, stroke, rect, fill, noFill, deltaTime, image, loadImage, mouseX, mouseY, canvas, dist, textSize, textAlign, CENTER, text, main, noStroke, frameCount } from "./p5.js";
+
+let clicked = false;
+window.mouseClicked = (e) => {
+  clicked = true;
+};
+
+main((flgresize) => {
+  const rnd = (n) => Math.floor(Math.random() * n);
+  const r = () => rnd(256);
+  fill(r(), r(), r());
+  stroke(r(), r(), r());
+  //for (let i = 0; i < 100; i++) {
+    const cw = canvas.width;
+    const ch = canvas.height;
+    const rw = cw / 8;
+    const rh = ch / 8;
+    const x = rnd(cw);
+    const y = rnd(ch);
+    const w = rnd(Math.min(cw - x, rw));
+    const h = rnd(Math.min(ch - y, rh));
+    rect(x, y, w, h);
+  //}
+  fill(255);
+  stroke(0);
+  const mw = clicked ? 300 : 30;
+  clicked = false;
+  rect(mouseX - mw / 2, mouseY - mw / 2, mw, mw);
+});
+</script>
